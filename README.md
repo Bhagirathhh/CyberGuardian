@@ -101,6 +101,7 @@ The objective of Cyber Guardian is to provide a lightweight cybersecurity toolki
 Clone the repository:
 
 bash
+
 git clone https://github.com/Bhagirathhh/CyberGuardian.git
 
 cd CyberGuardian
