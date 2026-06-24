@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cyber Guardian</title>
+<style>
+:root{
+  --bg1:#020617;
+  --bg2:#0f172a;
+  --bg3:#1e293b;
+  --glass:rgba(255,255,255,0.08);
+  --glass-border:rgba(255,255,255,0.12);
+  --text:#e2e8f0;
+  --muted:#94a3b8;
+  --cyan:#06b6d4;
+  --blue:#3b82f6;
+  --green:#22c55e;
+  --amber:#f59e0b;
+  --red:#ef4444;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+}
+
+html{
+  height:100%;
+  overflow-x:hidden;
+}
+
+body{
+  min-height:100dvh;
+  background:
+    radial-gradient(circle at top left, rgba(59,130,246,.15), transparent 30%),
+    radial-gradient(circle at top right, rgba(6,182,212,.14), transparent 28%),
+    linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));
+  color:var(--text);
+  overflow-y:auto;
+  overflow-x:hidden;
+  position:relative;
+}
+
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle, rgba(0,255,255,0.07) 1px, transparent 1px);
+  background-size:40px 40px;
+  animation:gridMove 30s linear infinite;
+  pointer-events:none;
+  z-index:0;
+}
+
+@keyframes gridMove{
+  from{ transform:translate3d(0,0,0); }
+  to{ transform:translate3d(-200px,-200px,0); }
+}
+
+.container{
+  position:relative;
+  z-index:1;
+  width:min(1200px, calc(100vw - 32px));
+  margin:0 auto;
+  padding:40px 0 36px;
+}
+
+.hero{
+  text-align:center;
+  padding:28px 18px 18px;
+  margin-bottom:18px;
+}
+
+.badge{
+  display:inline-block;
+  padding:9px 14px;
+  border-radius:999px;
+  background:rgba(6,182,212,.14);
+  color:#a5f3fc;
+  border:1px solid rgba(6,182,212,.25);
+  font-size:13px;
+  letter-spacing:.3px;
+}
+
+h1{
+  font-size:clamp(34px, 6vw, 56px);
+  margin:16px 0 10px;
+  text-shadow:0 0 20px rgba(0,255,255,0.18);
+}
+
+.subtitle{
+  color:var(--muted);
+  font-size:clamp(15px, 2vw, 18px);
+  line-height:1.6;
+  max-width:760px;
+  margin:0 auto;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:14px;
+  margin:26px 0 8px;
+}
+
+.stat{
+  padding:18px;
+  border-radius:18px;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.08);
+  backdrop-filter:blur(14px);
+  box-shadow:0 0 24px rgba(0,255,255,0.08);
+}
+
+.stat .label{
+  color:var(--muted);
+  font-size:13px;
+  margin-bottom:8px;
+}
+
+.stat .value{
+  font-size:20px;
+  font-weight:800;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:18px;
+  margin-top:24px;
+}
+
+.card-link{
+  text-decoration:none;
+  color:inherit;
+  outline:none;
+}
+
+.card{
+  height:100%;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.12);
+  backdrop-filter:blur(16px);
+  border-radius:22px;
+  padding:28px;
+  box-shadow:0 0 30px rgba(0,255,255,0.10);
+  transition:.28s ease;
+  min-height:210px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:flex-start;
+  text-align:left;
+}
+
+.card:hover{
+  transform:translateY(-8px) scale(1.01);
+  box-shadow:0 18px 40px rgba(59,130,246,0.18);
+  border-color:rgba(6,182,212,.3);
+}
+
+.card-link:focus-visible .card{
+  outline:3px solid rgba(125,211,252,.95);
+  outline-offset:4px;
+  box-shadow:0 0 0 6px rgba(6,182,212,.18);
+}
+
+.icon{
+  font-size:42px;
+  margin-bottom:14px;
+}
+
+.card h2{
+  font-size:24px;
+  margin-bottom:10px;
+}
+
+.card p{
+  color:#cbd5e1;
+  font-size:15px;
+  line-height:1.6;
+}
+
+.feature-row{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:16px;
+  margin-top:20px;
+}
+
+.mini{
+  padding:18px;
+  border-radius:18px;
+  background:rgba(17,25,40,0.78);
+  border:1px solid rgba(255,255,255,0.08);
+}
+
+.mini h3{
+  font-size:16px;
+  margin-bottom:8px;
+}
+
+.mini p{
+  color:#cbd5e1;
+  font-size:14px;
+  line-height:1.5;
+}
+
+.footer{
+  margin-top:34px;
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+}
+
+@media (max-width: 640px){
+  .container{
+    width:min(100vw - 20px, 1200px);
+    padding-top:24px;
+  }
+  .hero{
+    padding:18px 8px 10px;
+  }
+  .card{
+    padding:22px;
+    min-height:190px;
+  }
+  .card h2{
+    font-size:21px;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <section class="hero" aria-labelledby="main-title">
+    <div class="badge">Cyber Security Dashboard</div>
+    <h1 id="main-title">🛡 Cyber Guardian</h1>
+    <p class="subtitle">
+      Personal security center for password checks, phishing analysis, system audit, live monitoring, hashing, PDF reports, and file integrity tools.
+    </p>
+  </section>
+
+  <section class="stats" aria-label="Platform highlights">
+    <div class="stat">
+      <div class="label">Tools</div>
+      <div class="value">7+</div>
+    </div>
+    <div class="stat">
+      <div class="label">Mode</div>
+      <div class="value">Futuristic</div>
+    </div>
+    <div class="stat">
+      <div class="label">Focus</div>
+      <div class="value">Security</div>
+    </div>
+    <div class="stat">
+      <div class="label">UI</div>
+      <div class="value">Responsive</div>
+    </div>
+  </section>
+
+  <section class="grid" aria-label="Security tools">
+    <a class="card-link" href="/password" aria-label="Open Password Analyzer">
+      <article class="card">
+        <div class="icon">🔑</div>
+        <h2>Password Analyzer</h2>
+        <p>Check password strength with security scoring, policy checks, and detailed feedback.</p>
+      </article>
+    </a>
+
+    <a class="card-link" href="/generate-password" aria-label="Open Password Generator">
+      <article class="card">
+        <div class="icon">🎲</div>
+        <h2>Password Generator</h2>
+        <p>Generate strong passwords with selectable length, symbols, digits, and case options.</p>
+      </article>
+    </a>
+
+    <a class="card-link" href="/hash-generator" aria-label="Open Hash Generator">
+      <article class="card">
+        <div class="icon">#</div>
+        <h2>Hash Generator</h2>
+        <p>Create secure hashes for text and compare outputs for quick verification workflows.</p>
+      </article>
+    </a>
+
+    <a class="card-link" href="/url-scanner" aria-label="Open URL Scanner">
+      <article class="card">
+        <div class="icon">🌐</div>
+        <h2>URL Scanner</h2>
+        <p>Analyze links for phishing indicators, suspicious keywords, and risky domain patterns.</p>
+      </article>
+    </a>
+
+    <a class="card-link" href="/audit" aria-label="Open Security Audit">
+      <article class="card">
+        <div class="icon">🖥️</div>
+        <h2>Security Audit</h2>
+        <p>Inspect system posture with CPU, RAM, disk, OS, Python, and live health indicators.</p>
+      </article>
+    </a>
+
+    <a class="card-link" href="/live-monitor" aria-label="Open Live Resource Monitor">
+      <article class="card">
+        <div class="icon">📡</div>
+        <h2>Live Monitor</h2>
+        <p>Track real-time CPU, RAM, and disk activity in a dynamic monitoring dashboard.</p>
+      </article>
+    </a>
+
+    <a class="card-link" href="/file-integrity" aria-label="Open File Integrity Checker">
+      <article class="card">
+        <div class="icon">📁</div>
+        <h2>File Integrity Checker</h2>
+        <p>Upload a file and verify SHA-256 hash integrity against a known expected checksum.</p>
+      </article>
+    </a>
+
+    <a class="card-link" href="/pdf-report" aria-label="Download PDF Report">
+      <article class="card">
+        <div class="icon">📄</div>
+        <h2>PDF Report</h2>
+        <p>Download a formatted security report based on the current audit snapshot.</p>
+      </article>
+    </a>
+  </section>
+
+  <section class="feature-row" aria-label="Highlights">
+    <div class="mini">
+      <h3>Live Monitoring</h3>
+      <p>Real-time system metrics with a polished operations-style interface.</p>
+    </div>
+    <div class="mini">
+      <h3>Security Focused</h3>
+      <p>Built around practical checks for passwords, URLs, files, and system health.</p>
+    </div>
+    <div class="mini">
+      <h3>Modern Layout</h3>
+      <p>Glassmorphism design with responsive cards and keyboard-friendly navigation.</p>
+    </div>
+  </section>
+
+  <div class="footer">Cyber Guardian Security Suite © 2026</div>
+</div>
+
+</body>
+</html>
